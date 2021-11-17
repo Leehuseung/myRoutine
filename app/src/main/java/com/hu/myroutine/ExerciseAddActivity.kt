@@ -18,8 +18,7 @@ class ExerciseAddActivity : AppCompatActivity() {
         val topAppBar = binding.addExerciseBarMain.topAppBar
 
         topAppBar.setNavigationOnClickListener{
-            val intent = Intent(this,MainActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         topAppBar.setOnMenuItemClickListener { menuItem ->
