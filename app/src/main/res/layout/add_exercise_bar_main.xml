@@ -24,7 +24,8 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-<!--    <include layout="@layout/content_main" />-->
+    <include android:id="@+id/exerciseAddMain"
+        layout="@layout/add_exercise_main" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

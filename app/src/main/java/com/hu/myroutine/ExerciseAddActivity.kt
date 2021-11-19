@@ -1,8 +1,11 @@
 package com.hu.myroutine
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.View
 import android.widget.Toast
 import com.hu.myroutine.databinding.ActivityExerciseAddBinding
 
@@ -24,7 +27,16 @@ class ExerciseAddActivity : AppCompatActivity() {
         topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.confirm -> {
-                    Toast.makeText(applicationContext,"운동 등록하기",Toast.LENGTH_SHORT).show()
+                    val exercise = binding.addExerciseBarMain.exerciseAddMain.exerciseInput.text.toString()
+
+                    if(exercise == ""){
+                        Toast.makeText(applicationContext,"추가할 운동을 입력해주세요.",Toast.LENGTH_SHORT).show()
+                    } else {
+                        val returnIntent = Intent()
+                        returnIntent.putExtra("exercise",exercise)
+                        setResult(Activity.RESULT_OK,returnIntent)
+                        finish()
+                    }
                     true
                 }
                 else -> false
