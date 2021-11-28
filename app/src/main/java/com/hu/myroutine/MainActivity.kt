@@ -8,6 +8,7 @@ import android.view.Menu
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import com.hu.myroutine.databinding.ActivityMainBinding
@@ -44,6 +45,22 @@ class MainActivity : AppCompatActivity() {
         navHeaderBinding.addExercise.setOnClickListener {
             val intent = Intent(this,ExerciseAddActivity::class.java)
             resultLauncher.launch(intent)
+        }
+
+        //topAppBar event
+        topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.addRoutine -> {
+                    val intent = Intent(this,RoutineAddActivity::class.java)
+                    startActivity(intent)
+                    true
+                }
+                R.id.more -> {
+                    // Handle more item (inside overflow menu) press
+                    true
+                }
+                else -> false
+            }
         }
 
         //우측상단 nav 버튼 toggle 동작하도록 변경
@@ -94,7 +111,7 @@ class MainActivity : AppCompatActivity() {
                 val itemName = it.title
                 it.isChecked = true
                 binding.drawerLayout.closeDrawers()
-                Toast.makeText(applicationContext,"선택한 메뉴는 : " + itemName, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(applicationContext,"선택한 메뉴는 : " + itemName, Toast.LENGTH_SHORT).show()
 
                 val bundle = Bundle()
                 bundle.putString("title",itemName.toString())
@@ -111,7 +128,7 @@ class MainActivity : AppCompatActivity() {
                 val itemName = it.title
                 it.isChecked = true
                 binding.drawerLayout.closeDrawers()
-                Toast.makeText(applicationContext,"선택한 메뉴는 : " + itemName, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(applicationContext,"선택한 메뉴는 : " + itemName, Toast.LENGTH_SHORT).show()
 
                 val bundle = Bundle()
                 bundle.putString("title",itemName.toString())
@@ -128,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                 val itemName = it.title
                 it.isChecked = true
                 binding.drawerLayout.closeDrawers()
-                Toast.makeText(applicationContext,"선택한 메뉴는 : " + itemName, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(applicationContext,"선택한 메뉴는 : " + itemName, Toast.LENGTH_SHORT).show()
 
                 val bundle = Bundle()
                 bundle.putString("title",itemName.toString())
@@ -141,6 +158,13 @@ class MainActivity : AppCompatActivity() {
                 return@setOnMenuItemClickListener true
             }
         }
+
+        //1번 메뉴
+        if(menuList.size > 0){
+            menu.performIdentifierAction(1,0)
+        }
+
+
     }
 
     private fun initCheckedItem() {
